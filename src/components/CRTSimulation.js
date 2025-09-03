@@ -112,22 +112,21 @@ const CRTSimulation = () => {
       // Trayectoria recta hasta placas verticales
       ctx.lineTo(50, centerY);
       
-      // Deflexión vertical
-      const verticalDeflection = (verticalVoltage / CRT_CONFIG.maxVoltage) * 20;
-      ctx.lineTo(56, centerY + verticalDeflection * 0.3);
-      ctx.lineTo(80, centerY + verticalDeflection);
-      
-      // Deflexión horizontal (no visible en vista lateral)
-      ctx.lineTo(92, centerY + verticalDeflection);
-      ctx.lineTo(width - 15, centerY + verticalDeflection * 1.5);
-      
+      // Escalado de posición Y física al canvas
+      const scaleY = (height * 0.4) / CRT_CONFIG.screenSize; 
+      const yDeflection = electronPos.y * scaleY;
+
+      ctx.lineTo(80, centerY + yDeflection);
+      ctx.lineTo(width - 15, centerY + yDeflection);
+
       ctx.stroke();
-      
-      // Punto del electrón
+
+      // Punto del electrón (posición real en pantalla lateral)
       ctx.fillStyle = '#ffff00';
       ctx.beginPath();
-      ctx.arc(width - 10, centerY + verticalDeflection * 1.5, 2, 0, 2 * Math.PI);
+      ctx.arc(width - 10, centerY + yDeflection, 2, 0, 2 * Math.PI);
       ctx.fill();
+
     }
   };
 
@@ -162,18 +161,20 @@ const CRTSimulation = () => {
       ctx.moveTo(30, centerX);
       ctx.lineTo(80, centerX);
       
-      // Deflexión horizontal
-      const horizontalDeflection = (horizontalVoltage / CRT_CONFIG.maxVoltage) * 20;
-      ctx.lineTo(86, centerX + horizontalDeflection * 0.3);
-      ctx.lineTo(width - 15, centerX + horizontalDeflection * 1.5);
-      
+      // Escalado de posición X física al canvas
+      const scaleX = (height * 0.4) / CRT_CONFIG.screenSize;
+      const xDeflection = electronPos.x * scaleX;
+
+      ctx.lineTo(width - 15, centerX + xDeflection);
+
       ctx.stroke();
-      
-      // Punto del electrón
+
+      // Punto del electrón (posición real en pantalla superior)
       ctx.fillStyle = '#ffff00';
       ctx.beginPath();
-      ctx.arc(width - 10, centerX + horizontalDeflection * 1.5, 2, 0, 2 * Math.PI);
+      ctx.arc(width - 10, centerX + xDeflection, 2, 0, 2 * Math.PI);
       ctx.fill();
+
     }
   };
 
@@ -530,6 +531,59 @@ const CRTSimulation = () => {
                   className="w-full h-1"
                 />
               </div>
+
+              {/* Presets Lissajous */}
+              <div className="mt-4">
+                <h3 className="text-md font-semibold border-b border-gray-600 pb-1 mb-2">Presets</h3>
+
+                {/* Relación de frecuencias */}
+                <div className="mb-2">
+                  <label className="block text-xs font-medium mb-1">Relación ωx : ωy</label>
+                  <select
+                    className="w-full bg-gray-700 text-white p-1 rounded text-sm"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === "1:1") {
+                        setVerticalFreq(1);
+                        setHorizontalFreq(1);
+                      } else if (value === "1:2") {
+                        setVerticalFreq(1);
+                        setHorizontalFreq(2);
+                      } else if (value === "1:3") {
+                        setVerticalFreq(1);
+                        setHorizontalFreq(3);
+                      } else if (value === "2:3") {
+                        setVerticalFreq(2);
+                        setHorizontalFreq(3);
+                      }
+                    }}
+                  >
+                    <option value="1:1">1:1</option>
+                    <option value="1:2">1:2</option>
+                    <option value="1:3">1:3</option>
+                    <option value="2:3">2:3</option>
+                  </select>
+                </div>
+
+                {/* Fase */}
+                <div>
+                  <label className="block text-xs font-medium mb-1">Fase δ</label>
+                  <select
+                    className="w-full bg-gray-700 text-white p-1 rounded text-sm"
+                    onChange={(e) => {
+                      const value = parseFloat(e.target.value);
+                      setHorizontalPhase(value);
+                    }}
+                  >
+                    <option value="0">0</option>
+                    <option value={Math.PI/4}>π/4</option>
+                    <option value={Math.PI/2}>π/2</option>
+                    <option value={3*Math.PI/4}>3π/4</option>
+                    <option value={Math.PI}>π</option>
+                  </select>
+                </div>
+              </div>
+
             </div>
           )}
           
