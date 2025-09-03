@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+Simulación del Comportamiento de un Tubo de Rayos Catódicos (CRT)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto implementa una simulación interactiva de un tubo de rayos catódicos (CRT), con fines didácticos en el curso de Física 3 de la Universidad del Valle de Guatemala.
+La aplicación permite visualizar el movimiento de electrones dentro del tubo, observar las vistas lateral y superior del haz, y reproducir las Figuras de Lissajous al aplicar señales sinusoidales a las placas deflectoras.
 
-## Available Scripts
+Características principales
 
-In the project directory, you can run:
+Vista lateral del CRT mostrando la deflexión vertical.
 
-### `npm start`
+Vista superior mostrando la deflexión horizontal.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Pantalla frontal donde se observa el impacto del haz de electrones con efecto de persistencia.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Control de voltaje de aceleración, voltajes de placas y persistencia.
 
-### `npm test`
+Dos modos de operación:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Manual: el usuario ajusta los voltajes de placas directamente.
 
-### `npm run build`
+Automático (Lissajous): se aplican señales sinusoidales con frecuencia y fase ajustables.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Presets de figuras de Lissajous para reproducir combinaciones clásicas de frecuencias y fases.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Botones de inicio, pausa, reinicio y limpieza de pantalla.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Requisitos previos
 
-### `npm run eject`
+Node.js
+ versión 16 o superior.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm (incluido con Node.js).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Instalación y ejecución
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Clonar o descargar este repositorio.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Abrir una terminal en la carpeta del proyecto.
 
-## Learn More
+Instalar dependencias con:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Iniciar la aplicación en modo desarrollo:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm start
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Abrir http://localhost:3000
+ en el navegador para visualizar la simulación.
 
-### Making a Progressive Web App
+Scripts disponibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+En la carpeta del proyecto se pueden ejecutar los siguientes comandos:
 
-### Advanced Configuration
+npm start
+Inicia la aplicación en modo desarrollo.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+npm run build
+Genera la aplicación lista para producción en la carpeta build.
 
-### Deployment
+npm test
+Ejecuta las pruebas en modo interactivo.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Organización del código
 
-### `npm run build` fails to minify
+src/App.js: componente principal que carga la simulación.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+src/components/CRTSimulation.js: lógica central de la simulación y controles de usuario.
+
+src/index.js: punto de entrada de la aplicación.
+
+src/index.css: estilos principales (Tailwind CSS).
+
+Créditos
+
+Proyecto desarrollado como parte del curso Física 3 en la Universidad del Valle de Guatemala.
